@@ -1,5 +1,5 @@
 ---
-description: 欢迎使用前端代码规范
+description: 欢迎使用前端代码规范，使用过程中如碰到问题，请到 Github(https://github.com/vitorlee/documents/issues) 进行提问。
 ---
 
 # 前端代码规范
