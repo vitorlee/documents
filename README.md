@@ -502,7 +502,7 @@ HTML标签名、类名、标签属性和大部分属性值统一用小写
 
 ## 附录
 
-参考
+### 参考
 
 * [支付宝 - 移动 Web 开发经验](http://am-team.github.io/amg/dev-exp-doc.html)
 * [腾讯 Web 前端团队规范](http://alloyteam.github.io/CodeGuide/)
