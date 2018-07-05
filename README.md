@@ -504,8 +504,8 @@ HTML标签名、类名、标签属性和大部分属性值统一用小写
 
 ### 参考
 
-* [支付宝 - 移动 Web 开发经验](http://am-team.github.io/amg/dev-exp-doc.html)
-* [腾讯 Web 前端团队规范](http://alloyteam.github.io/CodeGuide/)
+* [支付宝 - 移动 Web 开发经验](http://am-team.github.io/amg/dev-exp-doc.html) ⬀
+* [腾讯 Web 前端团队规范](http://alloyteam.github.io/CodeGuide/) ⬀
 
 ### 工具
 
@@ -513,13 +513,13 @@ HTML标签名、类名、标签属性和大部分属性值统一用小写
 2. 在线图表编辑器：[Diagram](https://www.draw.io/) ⬀
 3. Unicode查询：[Unicode table](https://unicode-table.com/en/) ⬀
 4. 在线正则校验：[Regex](https://regex101.com/) ⬀
-5. json美化：[JSON formater ](https://jsonformatter.org/)
-6. 浏览器兼容语法检查：[Can I use](https://caniuse.com/)
-7. css 在线生成工具：[Mastering the :nth-child](http://nthmaster.com/) 、[CSS 三角生成](http://lugolabs.com/caret) 、[CSS 渐变生成器](https://cssgradient.io/) 、
+5. json美化：[JSON formater ](https://jsonformatter.org/) ⬀
+6. 浏览器兼容语法检查：[Can I use](https://caniuse.com/) ⬀
+7. css 在线生成工具：[Mastering the :nth-child](http://nthmaster.com/) ⬀ 、[CSS 三角生成](http://lugolabs.com/caret) ⬀ 、[CSS 渐变生成器](https://cssgradient.io/) ⬀
 
 ### 文档
 
-1. HTML 中 `meta` 属性：[常见的 HTML 头部标签](https://github.com/yisibl/blog/issues/1)
+1. HTML 中 `meta` 属性：[常见的 HTML 头部标签](https://github.com/yisibl/blog/issues/1) ⬀
 2. BOM 参考： [BOM的介绍](https://zh.wikipedia.org/wiki/%E4%BD%8D%E5%85%83%E7%B5%84%E9%A0%86%E5%BA%8F%E8%A8%98%E8%99%9F) ⬀ 、 [「带 BOM 的 UTF-8」和「无 BOM 的 UTF-8」有什么区别？](http://www.zhihu.com/question/20167122) ⬀
 
 
