@@ -1,5 +1,7 @@
 ---
-description: 欢迎使用前端代码规范，使用过程中如碰到问题，请到 Github(https://github.com/vitorlee/documents/issues) 进行提问。
+description: >-
+  欢迎使用前端代码规范，使用过程中如碰到问题，请到 Github(https://github.com/vitorlee/documents/issues)
+  进行提问。
 ---
 
 # 前端代码规范
@@ -404,7 +406,7 @@ HTML标签名、类名、标签属性和大部分属性值统一用小写
 
 #### 模块类型注释
 
-对多行和大功能模块，使用双注释标注，`<!-- 注释 -->` 和 `<!-- /注释 -->` 
+对多行和大功能模块，使用双注释标注，`<!-- 注释 -->` 和 `<!-- /注释 -->`
 
 ```markup
 <!-- Comment Text -->
@@ -492,7 +494,243 @@ HTML标签名、类名、标签属性和大部分属性值统一用小写
 
 ★ 核心目标：
 
-## **JavaScript 规范**
+1. 代码风格保持一致
+2. 易于理解和维护
+3. 遵循 CSS 设计，其它预处理器（LESS，SASS等）尽量统一
+
+### 代码规范
+
+#### 编码
+
+使用无 BOM 的 UTF-8 编码
+
+#### 缩进
+
+使用 2 个空格代替制表符（Tab）
+
+#### 冒号
+
+每条声明语句的 `:` 后应该插入一个空格
+
+#### 分号
+
+所有声明语句都应当以分号 `;` 结尾，包括最后一条。
+
+#### 风格
+
+* 使用展开（Expanded）格式
+* 样式选择器，属性名必须用小写
+* 每个声明块的左花括号 `{` 左侧有空格，并于选择器同行
+* 声明块的右花括号 `}` 应当单独成行
+
+⚑ 例：
+
+```css
+.selector,
+.selector-secondary,
+.selector[type="text"] {
+  padding: 15px;
+  margin-bottom: 15px;
+}
+```
+
+#### 简写形式
+
+对于属性值或颜色参数，省略小于 1 的小数前面的 0。
+
+```css
+.selector {
+  background-color: rgba(0,0,0,.5);
+}
+```
+
+使用简写形式的十六进制值
+
+```css
+.selector {
+  background-color: #fff;
+}
+```
+
+避免为 0 值指定单位
+
+```css
+.selector {
+  padding: 0 10px;
+}
+```
+
+### 命名规范
+
+* 采用 **模块名称 + 功能名称 + 修饰名** 方式
+* 使用小写字母，以下划线 `_` 分隔
+* 名称应当尽可能短，并且意义明确
+* **禁止** 单独使用 hook 等钩子类标识行为，造成 className 占用
+
+### Hack & 兼容规范
+
+* 尽量减少对Hack的使用和依赖
+* 兼容需按照版本从旧到新的原则
+* 两者都需有清晰注释
+
+⚑ 例：
+
+```css
+.hack {
+　　　color: #000;       /* For all */
+　　　*color: #666;      /* For IE7 and earlier */
+　　　_color: #777;      /* For IE6 and earlier */
+}
+
+.compatibility {
+    display: box;              /* OLD - Android 4.4- */
+    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+```
+
+### 选择器
+
+避免使用类型选择器，CSS 选择器是从右至左解析
+
+```css
+/* 不推荐 */
+div#element { 
+  width: 100px;
+}
+
+/* 推荐 */
+#element { 
+  width: 100px;
+}
+```
+
+避免多 id 嵌套
+
+```css
+/* 不推荐 */
+#block #element { 
+  width: 100px;
+}
+
+/* 推荐 */
+#element { 
+  width: 100px;
+}
+```
+
+### 注释规范
+
+#### 普通注释
+
+单行或功能模块说明注释，可以使用 `/**/` 或 `//`
+
+```css
+/* Comment Text */
+// Comment Text
+```
+
+#### 区块注释
+
+区块或文档注释方法：
+
+```css
+/**
+ * Comment Text
+ */
+```
+
+### LESS 规范
+
+#### 组织顺序
+
+1. @import
+2. 变量声明
+3. 样式声明
+
+⚑ 例：
+
+```css
+@import "mixins/size.less"; /* .less 后缀不得省略 */
+
+@default_color: #333;
+
+.selector {
+  width: 960px;
+  color: @default_color;
+}
+```
+
+#### 运算
+
+`+`  `-`  `*`  `/` 四个运算符两侧**必须**保留一个空格。`+`  `-` 两侧的操作数**必须**有相同的单位，如果其中一个是变量，另一个数值**必须**书写单位。
+
+```css
+/* 不推荐 */
+@a: 200px;
+@b: (@a+100)*2;
+
+/* 推荐 */
+@a: 200px;
+@b: (@a + 100px) * 2;
+```
+
+#### 变量
+
+* 变量根据逻辑进行分组列出
+* 使用驼峰式命名变量 `@blockElement`
+
+```css
+@colorBorder: #f5f5f5;
+@staticVersion: "?ver=1510712523";
+```
+
+#### 继承（Extend）
+
+使用继承时，如果在声明块内书写 `:extend` 语句，必须写在开头：
+
+⚑ 例：
+
+```css
+/* 不推荐 */
+.selector {
+  color: red;
+  &:extend(.mod all);
+}
+
+/* 推荐 */
+.selector {
+  &:extend(.mod all);
+  color: red;
+}
+```
+
+#### 混入（Mixins）
+
+1. 在定义 `mixin` 时，如果 `mixin` 名称不是一个需要使用的 className，必须加上括号，否则即使不被调用也会输出到 CSS 中。
+2. 如果混入的是本身不输出内容的 mixin，需要在 mixin 后添加括号（即使不传参数），以区分这是否是一个 className。
+
+⚑ 例：
+
+```css
+.selector() {
+  font-size: 2em;
+}
+
+h3 {
+  .selector(); 
+}
+```
+
+#### 嵌套
+
+* 将嵌套深度限制在 2 级。对于超过 3 级的嵌套，给予重新评估。
+* 避免大量的嵌套规则。当可读性受到影响时，将之打断。推荐避免出现多于20行的嵌套规则出现。
+
+## JavaScript 规范
 
 ★ 核心目标：
 
@@ -520,9 +758,5 @@ HTML标签名、类名、标签属性和大部分属性值统一用小写
 ### 文档
 
 1. HTML 中 `meta` 属性：[常见的 HTML 头部标签](https://github.com/yisibl/blog/issues/1) ⬀
-2. BOM 参考： [BOM的介绍](https://zh.wikipedia.org/wiki/%E4%BD%8D%E5%85%83%E7%B5%84%E9%A0%86%E5%BA%8F%E8%A8%98%E8%99%9F) ⬀ 、 [「带 BOM 的 UTF-8」和「无 BOM 的 UTF-8」有什么区别？](http://www.zhihu.com/question/20167122) ⬀
-
-
-
-
+2. BOM 参考： [BOM的介绍](https://zh.wikipedia.org/wiki/位元組順序記號) ⬀ 、 [「带 BOM 的 UTF-8」和「无 BOM 的 UTF-8」有什么区别？](http://www.zhihu.com/question/20167122) ⬀
 
