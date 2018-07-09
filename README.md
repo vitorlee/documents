@@ -428,7 +428,7 @@ HTML标签名、类名、标签属性和大部分属性值统一用小写
 -->
 ```
 
-#### 提示类型注释
+#### 细节注释
 
 提醒开发成员注意的区域，一般包含 3 类型：
 
@@ -719,7 +719,6 @@ div#element {
 .selector() {
   font-size: 2em;
 }
-
 h3 {
   .selector(); 
 }
@@ -736,6 +735,7 @@ h3 {
 
 1. 统一编码规范，有助于代码的维护
 2. 
+
 ### 代码规范
 
 #### 编码
@@ -746,7 +746,7 @@ h3 {
 
 使用 2 个空格代替制表符（Tab）
 
-风格
+#### 风格
 
 使用 [1tbs](https://eslint.org/docs/rules/brace-style)（One True Brace Style）风格
 
@@ -760,41 +760,120 @@ function foo() {
 
 // 条件判断，()使用一个空格
 if (foo) {
-  bar();
+  // do something
 } else {
-  baz();
+  // do something
 }
 ```
 
 #### 空格
 
-二元运算符两侧和三元运算符 `? :`前后必须有一个空格，一元运算符与操作对象之间不允许有空格。
+* 二元运算符两侧和三元运算符 `? :`前后必须有一个空格
+* 函数声明和调用的 `(` 前不要空格，但 `{` 前一定要有空格
+* 参数之间用 `,` 分隔，注意逗号后有一个空格
+* 一元运算符与操作对象之间不允许有空格
+
+⚑ 例：
 
 ```javascript
-var a = !arr.length;
-a++;
+// 二元运算
 a = b + c;
+
+// 三元运算
 a = b ? 1 : 2;
+
+// 函数
+function doSomething(name, item) {
+    // do something
+}
+
+// 一元运算符
+a++;
 ```
 
 #### 引号
 
-最外层统一使用单引号
+* 最外层统一使用单引号
+* 对象属性名不需要加引号
+
+⚑ 例：
 
 ```javascript
 // 不推荐
 var x = "test";
+var a = {
+    'b': 1
+};
 
 // 推荐
 var y = 'foo',
     z = '<div id="test"></div>';
+var a = {
+    b: 1
+};
+```
+#### 换行
+
+* 每个独立语句结束后必须换行
+* 每行不宜超过 120 个字符，一横屏较好
+* 运算符处换行时，运算符必须在新行的行首
+* 链式调用较长时采用缩进进行调整
+
+⚑ 例：
+
+```javascript
+var result = number1 + number2 + number3
+             + number4 + number5;
 ```
 
 ### 命名规范
 
-使用驼峰 Camel 命名法
+标准变量、函数、参数等使用驼峰 Camel 命名法，特殊常量和构造函数有其他规范。
+
+⚑ 例：
+
+```javascript
+// 变量
+var loadingModules = {};
+
+// 函数 + 参数
+function getMemberList(memberID) {
+  // do something
+}
+
+// 常量全部大写，用下划线连接
+var HTML_ENTITY = {};
+
+// 构造函数和 new 创建实例，首字母大写 
+function Person(name) {
+   // do something
+}
+var fooItem = new Foo()
+
+// boolean 类型的变量使用 is 或 has 开头
+var isReady = false;
+var hasMoreCommands = false;
+
+```
 
 ### 语言规范
+
+#### 变量
+
+#### 条件
+
+#### 循环
+
+#### 类型
+
+#### 字符串
+
+#### 对象
+
+#### 数组
+
+#### 函数
+
 
 ### 注释规范
 
@@ -842,6 +921,20 @@ function foo(p1, p2) {
  * @author liguancong <liguancong@styd.cn>
  * Copyright 2018 STYD.cn All Rights Reserved.
  */
+```
+
+#### 细节注释
+
+提醒开发成员注意的区域，一般包含 3 类型：
+
+1. 需持续开发：TODO
+2. 需特别说明：NOTE
+3. 需修复错误：FIXME
+
+```javascript
+// TODO: Comment Text
+// NOTE: Comment Text
+// FIXME: Comment Text
 ```
 
 ## 字体规范
