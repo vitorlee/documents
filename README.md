@@ -734,6 +734,116 @@ h3 {
 
 ★ 核心目标：
 
+1. 统一编码规范，有助于代码的维护
+2. 
+### 代码规范
+
+#### 编码
+
+使用无 BOM 的 UTF-8 编码
+
+#### 缩进
+
+使用 2 个空格代替制表符（Tab）
+
+风格
+
+使用 [1tbs](https://eslint.org/docs/rules/brace-style)（One True Brace Style）风格
+
+⚑ 例：
+
+```javascript
+// 声明函数时，()紧跟函数名
+function foo() {
+  return true;
+}
+
+// 条件判断，()使用一个空格
+if (foo) {
+  bar();
+} else {
+  baz();
+}
+```
+
+#### 空格
+
+二元运算符两侧和三元运算符 `? :`前后必须有一个空格，一元运算符与操作对象之间不允许有空格。
+
+```javascript
+var a = !arr.length;
+a++;
+a = b + c;
+a = b ? 1 : 2;
+```
+
+#### 引号
+
+最外层统一使用单引号
+
+```javascript
+// 不推荐
+var x = "test";
+
+// 推荐
+var y = 'foo',
+    z = '<div id="test"></div>';
+```
+
+### 命名规范
+
+使用驼峰 Camel 命名法
+
+### 语言规范
+
+### 注释规范
+
+* 尽量简短：提高代码本身的清晰性、可读性
+* 尽量详尽：合理的注释、空行排版等
+
+#### 单行注释
+
+必须独占一行。`//` 后跟一个空格，缩进与下一行被注释说明的代码一致。
+
+#### 多行注释
+
+避免使用 `/**/` 这样的多行注释。有多行注释内容时，使用多个单行注释。
+
+#### 函数 / 方法注释
+
+* 函数 / 方法注释必须包含函数说明，有参数和返回值时必须使用注释标识
+* 参数和返回值注释必须包含类型信息和说明
+* 各类标签`@param`, `@method`等请参考 [usejsdoc](http://usejsdoc.org/) 和 [JSDoc Guide](http://yuri4ever.github.io/jsdoc/)
+
+```javascript
+/**
+ * 函数描述
+ * @param {string} p1 参数1的说明
+ * @param {number=} p2 参数2的说明（可选）
+ * @return {Object} 返回值描述
+ */
+ 
+function foo(p1, p2) {
+  var p2 = p2 || 10;
+  return {
+    p1: p1,
+    p2: p2
+  };
+}
+```
+
+#### 文件注释
+
+文件注释用于告诉其他成员该文件中包含的内容。应提供的信息包含但不限于以下内容：
+
+```javascript
+/**
+ * @file 文件描述
+ * @author liguancong <liguancong@styd.cn>
+ * Copyright 2018 STYD.cn All Rights Reserved.
+ */
+```
+
 ## 字体规范
 
 ★ 核心目标：
