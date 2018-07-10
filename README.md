@@ -735,6 +735,7 @@ h3 {
 
 1. 统一编码规范，有助于代码的维护
 2. 
+
 ### 代码规范
 
 #### 编码
@@ -789,14 +790,14 @@ function doSomething(name, item) {
     // do something
 }
 ```
+
 #### 分号
+
 语句的结尾总是使用分号，函数、类声明、export 等除外
 
 ```javascript
 // 分号结束
 var foo = bar;
-
-分号结束
 var foo = function() {
     return true;
 };
