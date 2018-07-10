@@ -999,21 +999,69 @@ if (noValue == null) {
 
 #### 循环
 
+* 不要在循环体中包含函数表达式，事先将函数提取到循环体外
+* 对循环内多次使用的不变值，在循环外用变量缓存
+
 #### 类型
+
+* 类型检测优先使用 `typeof`
+* 对象类型检测使用 `instanceof`
+* `null` 或 `undefined` 的检测使用 `== null`
 
 #### 字符串
 
+* 使用单引号 `'` 和加号 `+` 对字符串拼接
+* 需要根据语境进行合理的转义
+
 #### 对象
+
+* 使用对象字面量 `{}` 创建新 `Object`
+
+```javascript
+// 不推荐
+var obj = new Object();
+
+// 推荐
+var obj = {};
+```
 
 #### 数组
 
+* 使用字面量值创建数组
+
+```javascript
+// 不推荐
+var arr = new Array();
+
+// 推荐
+var arr = [];
+```
+
 #### 函数
+
+* 使用函数声明，而不是函数表达式
+
+```javascript
+// 不推荐
+var foo = function () {
+  // do something
+}
+
+// 推荐
+function foo () {
+  // do something
+}
+```
 
 ### ES6 规范
 
+随着 ECMAScript 的不断发展，越来越多更新的语言特性将被使用，给应用的开发带来方便。本部分的目标是使 ECMAScript 新特性的代码风格保持一致，并给予一些实践建议。
+
+> 本文档仅包含新特性部分。基础部分请遵循上文。
+
 #### 变量
 
-使用 `let` 和 `const` 定义变量，不使用 `var` , 明确变量作用域
+* 使用 `let` 和 `const` 定义变量，不使用 `var` , 明确变量作用域
 
 ```javascript
 // 不推荐
@@ -1025,6 +1073,65 @@ for (var i = 0; i < 10; i++) {
 for (let i = 0; i < 10; i++) {
   // do something
 }
+```
+#### 字符串
+
+* 程序化生成字符串时，请使用模板字符串
+
+```javascript
+const c = 'c'
+
+// 不推荐
+const str = 'a' + 'b' + c
+
+// 推荐
+const str = `ab${c}`
+```
+
+#### 对象
+
+* 定义对象方法使用简写方式 （ `MethodDefinition` ）
+
+```javascript
+// 不推荐
+const foo = {
+  bar: function (x, y) {
+    return x + y;
+  }
+};
+
+// 推荐
+const foo = {
+  bar(x, y) {
+    return x + y;
+  }
+};
+```
+
+* 使用对象属性值的简写方式，并对声明方式分组
+
+```javascript
+// 不推荐
+const foo = {
+  x: x,
+  y: y,
+  z: z
+};
+
+const foo2 = {
+  x: 1,
+  y: 2,
+  z
+};
+
+// 推荐
+const foo = {x, y, z};
+
+const foo2 = {
+  x: 1,
+  y: 2,
+  z: z
+};
 ```
 
 ### vue.js 规范
