@@ -735,7 +735,6 @@ h3 {
 
 1. 统一编码规范，有助于代码的维护
 2. 
-
 ### 代码规范
 
 #### 编码
@@ -863,7 +862,7 @@ var result = number1 + number2 + number3
 
 #### 类名 & 构造函数
 
-采用大驼峰式（帕斯卡命名法）命名，如 `MyClass`
+采用大驼峰式（[帕斯卡命名法](https://zh.wikipedia.org/wiki/%E5%B8%95%E6%96%AF%E5%8D%A1%E5%91%BD%E5%90%8D%E6%B3%95)）命名，如 `MyClass`
 
 #### 私有变量
 
