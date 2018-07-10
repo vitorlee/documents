@@ -1203,6 +1203,69 @@ function foo(p1, p2) {
 
 ★ 核心目标：
 
+1. 保证各平台显示效果统一
+2. 优化字库使用
+
+### 系统字体
+
+用户系统中自带的字体，不需要任何特殊支持，引用时的顺序遵循：
+
+1. 系统字体优先
+2. 英文字体优先
+3. 兼容各平台
+4. 优雅降级
+
+⚑ 例：
+
+```css
+font-family:
+-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI", "Microsoft YaHei", STHeiTi, SimHei, Arial, sans-serif;
+```
+
+### 图标字体
+
+实现图标字体化的解决方案，一般用于简单颜色的图标展示。目前前端团队使用的线上图标制作库 [iconfont-阿里巴巴矢量图标库](http://iconfont.cn/) ⬀
+
+
+* 矢量字体，可随意改变大小
+* 可使用 `css` 字体的属性进行调整
+* 制作简单，文件小 
+* 兼容性效果好
+
+#### 使用规则
+
+* 引用名：前缀 ( `iconfont_` ) + 项目名，如：`iconfont_club`
+* 文件名：前缀 ( `iconfont_` ) + 项目名 + 格式，如：`iconfont_club.ttf`
+* 存放目录：静态资源 `font` 目录中
+* 必须包含的类型有：`.eot` `.woff` `.ttf` `.svg`
+
+⚑ 例：
+
+```css
+@font-face {
+  font-family: "iconfont_club";
+  src: url('iconfont_club.eot');
+  src: url('iconfont_club.eot#iefix') format('embedded-opentype'),
+       url('iconfont_club.woff') format('woff'),
+       url('iconfont_club.ttf') format('truetype'),
+       url('iconfont_club.svg#iconfont_club') format('svg');
+}
+.iconfont{
+  font-family: "iconfont_club" !important;
+  font-size: 16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+```
+
+### 规范
+
+* 禁止使用任何外链字库文件，所有文件必须有公司七牛 CDN 地址
+* 禁止要求用户下载任何中文字库文件，英文字库视情况讨论，但绝不允许在通用文件中加载
+* 禁止使用有版权争议的字库文件，所用字体必须为免费商用 （不等于破解），或有开源协议，包括但不限于：[GPL](http://www.gnu.org/licenses/gpl.html) ⬀, [SIL](https://en.wikipedia.org/wiki/SIL_Open_Font_License) ⬀
+
 ## 附录
 
 ### 参考
@@ -1224,4 +1287,4 @@ function foo(p1, p2) {
 
 1. HTML 中 `meta` 属性：[常见的 HTML 头部标签](https://github.com/yisibl/blog/issues/1) ⬀
 2. BOM 参考： [BOM的介绍](https://zh.wikipedia.org/wiki/位元組順序記號) ⬀ 、 [「带 BOM 的 UTF-8」和「无 BOM 的 UTF-8」有什么区别？](http://www.zhihu.com/question/20167122) ⬀
-
+3. iconfont 制作流程：[图标绘制](http://iconfont.cn/help/detail?spm=a313x.7781069.1998910419.14&helptype=draw) ⬀
