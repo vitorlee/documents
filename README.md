@@ -767,14 +767,17 @@ if (foo) {
 
 #### 空格
 
+* 一元运算符与操作对象之间不允许有空格
 * 二元运算符两侧和三元运算符 `? :`前后必须有一个空格
 * 函数声明和调用的 `(` 前不要空格，但 `{` 前一定要有空格
 * 参数之间用 `,` 分隔，注意逗号后有一个空格
-* 一元运算符与操作对象之间不允许有空格
 
 ⚑ 例：
 
 ```javascript
+// 一元运算符
+a++;
+
 // 二元运算
 a = b + c;
 
@@ -785,9 +788,26 @@ a = b ? 1 : 2;
 function doSomething(name, item) {
     // do something
 }
+```
+#### 分号
+语句的结尾总是使用分号，函数、类声明、export 等除外
 
-// 一元运算符
-a++;
+```javascript
+// 分号结束
+var foo = bar;
+
+分号结束
+var foo = function() {
+    return true;
+};
+
+// 无分号
+function foo() {
+    return true;
+}
+export function foo() {
+
+}
 ```
 
 #### 引号
@@ -817,7 +837,7 @@ var a = {
 * 每个独立语句结束后必须换行
 * 每行不宜超过 120 个字符，一横屏较好
 * 运算符处换行时，运算符必须在新行的行首
-* 链式调用较长时采用缩进进行调整
+* 链式调用和拼接字符串时，较长时采用缩进进行调整
 
 ⚑ 例：
 
@@ -829,8 +849,24 @@ var result = number1 + number2 + number3
 ### 命名规范
 
 * 命名中只能包含 `[a-zA-a\d\_]`，并以英文字母开头
+* 禁止：使用拼音等任何形式的缩写，建议选择合适的英文单词
+* 部分参数全部使用大写，如：ID, URL, HTTP 等
 
-标准变量、函数、参数等使用驼峰 Camel 命名法，特殊常量和构造函数有其他规范。
+#### 变量
+
+变量采用小驼峰式命名，如 `myVar`
+
+#### 常量
+
+使用全大写字母，并用下划线分隔单词，形如 `CONST_NAME_LIKE_THIS`
+
+#### 类名 & 构造函数
+
+采用大驼峰式（帕斯卡命名法）命名，如 `MyClass`
+
+#### 私有变量
+
+私有属性、变量和方法以下划线 `_` 开头，形如 `_privateMethod`
 
 ⚑ 例：
 
@@ -861,7 +897,105 @@ var hasMoreCommands = false;
 
 #### 变量
 
+* 谨慎使用全局变量
+* 变量、函数在使用前必须先定义
+* 变量必须**即用即声明**，提高可读性
+
+```javascript
+// 不推荐
+name = 'MyName';
+
+// 推荐
+var name = 'MyName';
+```
+
 #### 条件
+
+* 推荐使用严格判断模式 `===`，避免隐式的类型转换
+* 尽可能使用简洁的表达式
+* 对于相同变量或表达式的多值条件，用 `switch` 代替 `if`
+* 函数中的 `else` 可根据情况省略
+
+⚑ 例：简洁表达
+
+```javascript
+/*
+ * 字符串为空
+ */  
+
+// 不推荐
+if (name === '') {
+  // do something
+}
+// 推荐
+if (!name) {
+  // do something
+}
+```
+
+```javascript
+/*
+ * 字符串非空
+ */
+
+// 不推荐
+if (name !== '') {
+  // do something
+}
+
+// 推荐
+if (name) {
+  // do something
+}
+```
+
+```javascript
+/*
+ * 数组非空
+ */
+
+// 不推荐
+if (collection.length > 0) {
+  // do something
+}
+
+// 推荐
+if (collection.length) {
+  // do something
+}
+```
+
+```javascript
+/*
+ * 布尔不成立
+ */
+
+// 不推荐
+if (notTrue === false) {
+  // do something
+}
+
+// 推荐
+if (!notTrue) {
+  // do something
+}
+```
+
+```javascript
+/*
+ * null 或 undefined
+ */
+
+// 不推荐
+if (noValue === null || typeof noValue === 'undefined') {
+  // do something
+}
+
+// 推荐
+if (noValue == null) {
+  // do something
+}
+```
 
 #### 循环
 
@@ -874,6 +1008,24 @@ var hasMoreCommands = false;
 #### 数组
 
 #### 函数
+
+### ES6 规范
+
+#### 变量
+
+使用 `let` 和 `const` 定义变量，不使用 `var` , 明确变量作用域
+
+```javascript
+// 不推荐
+for (var i = 0; i < 10; i++) {
+  // do something
+}
+
+// 推荐
+for (let i = 0; i < 10; i++) {
+  // do something
+}
+```
 
 ### vue.js 规范
 
