@@ -38,6 +38,10 @@ description: >-
 
 统一团队的 JS 语法风格和书写习惯，减少程序出错的概率，其中也包含了 ES6 的语法规范和最佳实践。
 
+[字体规范](./#zi-ti-gui-fan)
+
+统一系统字体和图标字体的引用规范。
+
 ## 文件命名规范
 
 ★ 核心目标：
@@ -734,7 +738,8 @@ h3 {
 ★ 核心目标：
 
 1. 统一编码规范，有助于代码的维护
-2. 
+2. `ES6` 和 `Vue.js` 部分遵循主体规范
+
 ### 代码规范
 
 #### 编码
@@ -999,21 +1004,69 @@ if (noValue == null) {
 
 #### 循环
 
+* 不要在循环体中包含函数表达式，事先将函数提取到循环体外
+* 对循环内多次使用的不变值，在循环外用变量缓存
+
 #### 类型
+
+* 类型检测优先使用 `typeof`
+* 对象类型检测使用 `instanceof`
+* `null` 或 `undefined` 的检测使用 `== null`
 
 #### 字符串
 
+* 使用单引号 `'` 和加号 `+` 对字符串拼接
+* 需要根据语境进行合理的转义
+
 #### 对象
+
+* 使用对象字面量 `{}` 创建新 `Object`
+
+```javascript
+// 不推荐
+var obj = new Object();
+
+// 推荐
+var obj = {};
+```
 
 #### 数组
 
+* 使用字面量值创建数组
+
+```javascript
+// 不推荐
+var arr = new Array();
+
+// 推荐
+var arr = [];
+```
+
 #### 函数
+
+* 使用函数声明，而不是函数表达式
+
+```javascript
+// 不推荐
+var foo = function () {
+  // do something
+}
+
+// 推荐
+function foo () {
+  // do something
+}
+```
 
 ### ES6 规范
 
+随着 ECMAScript 的不断发展，越来越多更新的语言特性将被使用，给应用的开发带来方便。本部分的目标是使 ECMAScript 新特性的代码风格保持一致，并给予一些实践建议。
+
+> 本文档仅包含新特性部分。基础部分请遵循上文。
+
 #### 变量
 
-使用 `let` 和 `const` 定义变量，不使用 `var` , 明确变量作用域
+* 使用 `let` 和 `const` 定义变量，不使用 `var` , 明确变量作用域
 
 ```javascript
 // 不推荐
@@ -1026,53 +1079,112 @@ for (let i = 0; i < 10; i++) {
   // do something
 }
 ```
+#### 字符串
 
-### vue.js 规范
+* 程序化生成字符串时，请使用模板字符串
 
-####       组件名为多个单词
+```javascript
+const c = 'c'
 
-* 可以避免跟现有及未来的HTML元素相冲突， HTML元素都是单个单词的
+// 不推荐
+const str = 'a' + 'b' + c
 
-```text
-不推荐
+// 推荐
+const str = `ab${c}`
+```
+
+#### 对象
+
+* 定义对象方法使用简写方式 （ `MethodDefinition` ）
+
+```javascript
+// 不推荐
+const foo = {
+  bar: function (x, y) {
+    return x + y;
+  }
+};
+
+// 推荐
+const foo = {
+  bar(x, y) {
+    return x + y;
+  }
+};
+```
+
+* 使用对象属性值的简写方式，并对声明方式分组
+
+```javascript
+// 不推荐
+const foo = {
+  x: x,
+  y: y,
+  z: z
+};
+
+const foo2 = {
+  x: 1,
+  y: 2,
+  z
+};
+
+// 推荐
+const foo = {x, y, z};
+
+const foo2 = {
+  x: 1,
+  y: 2,
+  z: z
+};
+```
+
+### Vue.js 规范
+
+#### 组件名为多个单词
+
+* 可以避免跟现有及未来的 HTML 元素相冲突，HTML 元素都是单个单词的
+
+```javascript
+// 不推荐
 Vue.component('todo', {
-  // ...
+  // do something
 })
 
 export default {
   name: 'Todo',
-  // ...
+  // do something
 }
 
-推荐
+// 推荐
 Vue.component('todo-item', {
-  // ...
+  // do something
 })
 
 export default {
   name: 'TodoItem',
-  // ...
+  // do something
 }
 ```
 
-####     props 定义
+#### props 定义
 
-       props 定义应该尽量详细
+props 定义应该尽量详细
 
 * 需要指定其类型
-* 对象和数组使用defalut属性
+* 对象和数组使用 `defalut` 属性
 
-```text
-  default: function () {
-        return { message: 'hello' }
-      }
+```javascript
+default: function () {
+  return { message: 'hello' }
+}
 ```
 
-#### 为 v-for 设置键值 加上key属性
+#### 为 v-for 设置键值 加上 key 属性
 
-  便于维护内部组件及其子树的状态
+* 便于维护内部组件及其子树的状态
 
-```text
+```javascript
 <ul>
   <li
     v-for="todo in todos"
@@ -1083,16 +1195,17 @@ export default {
 </ul>
 ```
 
-避免 v-if 和 v-for  用在一起 
+* 避免 v-if 和 v-for  用在一起 
 
-永远不要把 `v-if` 和 `v-for` 同时用在同一个元素上**。**
+永远不要把 `v-if` 和 `v-for` 同时用在同一个元素上。
 
-#### [**组件**](https://cn.vuejs.org/v2/guide/single-file-components.html)**的文件名单词大写开头驼峰 \(PascalCase\)**
+#### [组件](https://cn.vuejs.org/v2/guide/single-file-components.html)  ⬀
 
-* 基础组件：应用特定样式和约定的基础组件（也就是展示类的， 无逻辑的或无状态的组件） 使用 Base 开头
-* 单例组件名： 每个页面只使用一次 不接受任何prop 为自己的应用定制的 如果需要添加props 那就不是单例组件  单例组件使用The开头
+* 使用采用大驼峰式命名组件
+* 基础组件：应用特定样式和约定的基础组件（也就是展示类的， 无逻辑的或无状态的组件）使用 Base 开头
+* 单例组件名： 每个页面只使用一次 不接受任何prop 为自己的应用定制的 如果需要添加 props 那就不是单例组件  单例组件使用The开头
 * 紧密耦合的组件名：和父组件紧密耦合的子组件以父组件名作为前缀命名
-* 组件名书写完整单词 不能写单词缩写
+* 组件名书写完整单词，不能写单词缩写
 
 ### 注释规范
 
@@ -1160,6 +1273,69 @@ function foo(p1, p2) {
 
 ★ 核心目标：
 
+1. 保证各平台显示效果统一
+2. 优化字库使用
+
+### 系统字体
+
+用户系统中自带的字体，不需要任何特殊支持，引用时的顺序遵循：
+
+1. 系统字体优先
+2. 英文字体优先
+3. 兼容各平台
+4. 优雅降级
+
+⚑ 例：
+
+```css
+font-family:
+-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI", "Microsoft YaHei", STHeiTi, SimHei, Arial, sans-serif;
+```
+
+### 图标字体
+
+实现图标字体化的解决方案，一般用于简单颜色的图标展示。目前前端团队使用的线上图标制作库 [iconfont-阿里巴巴矢量图标库](http://iconfont.cn/) ⬀
+
+
+* 矢量字体，可随意改变大小
+* 可使用 `css` 字体的属性进行调整
+* 制作简单，文件小 
+* 兼容性效果好
+
+#### 使用规则
+
+* 引用名：前缀 ( `iconfont_` ) + 项目名，如：`iconfont_club`
+* 文件名：前缀 ( `iconfont_` ) + 项目名 + 格式，如：`iconfont_club.ttf`
+* 存放目录：静态资源 `font` 目录中
+* 必须包含的类型有：`.eot` `.woff` `.ttf` `.svg`
+
+⚑ 例：
+
+```css
+@font-face {
+  font-family: "iconfont_club";
+  src: url('iconfont_club.eot');
+  src: url('iconfont_club.eot#iefix') format('embedded-opentype'),
+       url('iconfont_club.woff') format('woff'),
+       url('iconfont_club.ttf') format('truetype'),
+       url('iconfont_club.svg#iconfont_club') format('svg');
+}
+.iconfont{
+  font-family: "iconfont_club" !important;
+  font-size: 16px;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+```
+
+### 规范
+
+* 禁止使用任何外链字库文件，所有文件必须有公司七牛 CDN 地址
+* 禁止要求用户下载任何中文字库文件，英文字库视情况讨论，但绝不允许在通用文件中加载
+* 禁止使用有版权争议的字库文件，所用字体必须为免费商用 （不等于破解），或有开源协议，包括但不限于：[GPL](http://www.gnu.org/licenses/gpl.html) ⬀, [SIL](https://en.wikipedia.org/wiki/SIL_Open_Font_License) ⬀
+
 ## 附录
 
 ### 参考
@@ -1181,4 +1357,4 @@ function foo(p1, p2) {
 
 1. HTML 中 `meta` 属性：[常见的 HTML 头部标签](https://github.com/yisibl/blog/issues/1) ⬀
 2. BOM 参考： [BOM的介绍](https://zh.wikipedia.org/wiki/位元組順序記號) ⬀ 、 [「带 BOM 的 UTF-8」和「无 BOM 的 UTF-8」有什么区别？](http://www.zhihu.com/question/20167122) ⬀
-
+3. iconfont 制作流程：[图标绘制](http://iconfont.cn/help/detail?spm=a313x.7781069.1998910419.14&helptype=draw) ⬀
